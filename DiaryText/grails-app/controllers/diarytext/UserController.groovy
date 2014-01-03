@@ -4,8 +4,41 @@ class UserController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    def beforeInterceptor = [action:this.&auth,except:['login', 'logout', 'authenticate']]
+    def auth() {
+       if (!session.user){
+           redirect(controller:"user", action:"login")
+           return false
+       }else{
+           redirect(controller: "diary",action: "list")
+           return true
+       }
+    }
+
+
     def index = {
         redirect(action: "list", params: params)
+    }
+
+    def login={}
+
+    def logout={
+        flash.message = "Goodbye ${session.user.userName}"
+        session.user = null
+        redirect(action:"login")
+    }
+
+    def authenticate = {
+        def tmp = params.password.encodeAsSHA1();
+        def user = User.findByUserNameAndPassword(params.login, params.password.encodeAsSHA1())
+        if(user){
+            session.user = user
+//            flash.message = "Hello ${user.userName}!"
+            redirect(controller:"diary", action:"list")
+        }else{
+            flash.message = "Sorry, ${params.login}. Please try again."
+            redirect(action:"login")
+        }
     }
 
     def list = {

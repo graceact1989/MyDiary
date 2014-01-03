@@ -44,9 +44,16 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="diary.lastModify.label" default="Last Modify" /></td>
+                            <td valign="top" class="name"><g:message code="diary.lastUpdated.label" default="Last Updated" /></td>
                             
-                            <td valign="top" class="value"><g:formatDate date="${diaryInstance?.lastModify}" /></td>
+                            <td valign="top" class="value"><g:formatDate date="${diaryInstance?.lastUpdated}" /></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="diary.dateCreated.label" default="Date Created" /></td>
+                            
+                            <td valign="top" class="value"><g:formatDate date="${diaryInstance?.dateCreated}" /></td>
                             
                         </tr>
                     

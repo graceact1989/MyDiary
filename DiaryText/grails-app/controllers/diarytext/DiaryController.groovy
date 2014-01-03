@@ -4,6 +4,27 @@ class DiaryController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    def beforeInterceptor = [action:this.&auth]
+    def auth() {
+        if (!session.user){
+            redirect(controller:"user", action:"login")
+            return false
+        }
+    }
+
+    def search={
+        if(!params.q){
+            params.q="*"
+        }
+        def resultsMap = Diary.search(params.q, params)
+        render(view:'list',
+                model:[
+                        diaryInstanceList:resultsMap.results,
+                        diaryInstanceTotal:Diary.countHits(params.q)
+                ]
+        )
+    }
+
     def index = {
         redirect(action: "list", params: params)
     }

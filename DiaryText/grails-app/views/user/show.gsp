@@ -44,9 +44,9 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="user.createDate.label" default="Create Date" /></td>
+                            <td valign="top" class="name"><g:message code="user.dateCreated.label" default="Date Created" /></td>
                             
-                            <td valign="top" class="value"><g:formatDate date="${userInstance?.createDate}" /></td>
+                            <td valign="top" class="value"><g:formatDate date="${userInstance?.dateCreated}" /></td>
                             
                         </tr>
                     

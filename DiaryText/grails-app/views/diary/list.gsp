@@ -9,7 +9,7 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>
+            %{--<span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></span>--}%
             <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
@@ -17,42 +17,33 @@
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
-            <div class="list">
-                <table>
-                    <thead>
-                        <tr>
-                        
-                            <g:sortableColumn property="id" title="${message(code: 'diary.id.label', default: 'Id')}" />
-                        
-                            <th><g:message code="diary.user.label" default="User" /></th>
-                        
-                            <g:sortableColumn property="text" title="${message(code: 'diary.text.label', default: 'Text')}" />
-                        
-                            <g:sortableColumn property="lastModify" title="${message(code: 'diary.lastModify.label', default: 'Last Modify')}" />
-                        
-                            <g:sortableColumn property="parentId" title="${message(code: 'diary.parentId.label', default: 'Parent Id')}" />
-                        
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <g:each in="${diaryInstanceList}" status="i" var="diaryInstance">
-                        <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                        
-                            <td><g:link action="show" id="${diaryInstance.id}">${fieldValue(bean: diaryInstance, field: "id")}</g:link></td>
-                        
-                            <td>${fieldValue(bean: diaryInstance, field: "user")}</td>
-                        
-                            <td>${fieldValue(bean: diaryInstance, field: "text")}</td>
-                        
-                            <td><g:formatDate date="${diaryInstance.lastModify}" /></td>
-                        
-                            <td>${fieldValue(bean: diaryInstance, field: "parentId")}</td>
-                        
-                        </tr>
-                    </g:each>
-                    </tbody>
-                </table>
-            </div>
+            <g:each in="${diaryInstanceList}" status="i" var="diaryInstance">
+                <div class="diary">
+                    %{--<h2>${diaryInstance.dateCreated.format("yyyy-MM-dd HH:mm:ss")}</h2>--}%
+
+                    %{--<p class="diary-details">--}%
+                        %{--<span class="question">Who:</span>--}%
+                        %{--<span class="answer">--}%
+                            %{--${diaryInstance.user?.userName}</span>--}%
+                    %{--</p>--}%
+
+                    <p class="diary-details">
+
+                    <span class="question">${diaryInstance.dateCreated.format("yyyy-MM-dd HH:mm:ss")}-></span>
+                    <span class="answer">
+                        ${diaryInstance.text}</span>
+                    </p>
+
+                    %{--<p class="diary-details">--}%
+                        %{--<span class="question">When:</span>--}%
+                        %{--<span class="answer">--}%
+                            %{--${diaryInstance.dateCreated.--}%
+                                    %{--format("yyyy-MM-dd HH:mm:ss")}</span>--}%
+                    %{--</p>--}%
+
+                </div>
+            </g:each>
+
             <div class="paginateButtons">
                 <g:paginate total="${diaryInstanceTotal}" />
             </div>

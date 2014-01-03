@@ -1,20 +1,20 @@
 package diarytext
 
 class Diary {
-
+    static searchable = true
     static constraints = {
         user()
         text()
-        lastModify()
+        lastUpdated()
     }
 
     static belongsTo = [user:User]
 
-    int parentId;
-    String text;
-    Date lastModify;
-
+    int parentId
+    String text
+    Date lastUpdated
+    Date dateCreated
     public String toString(){
-        return user.userName+"\r\n"+text;
+        return "\r\n"+text;
     }
 }

@@ -290,6 +290,16 @@ a.header-main:link,a.header-main:visited {
     font-style: italic;
 }
 
+#loginHeader {
+    float: right;
+    color: #fff;
+}
+#loginHeader a{
+    color: #fff;
+}
+
+
+
 #footer {
     font-size: 0.75em;
     font-style: italic;
@@ -297,4 +307,20 @@ a.header-main:link,a.header-main:visited {
     margin-bottom: 1em;
     margin-top: 1em;
     clear: both;
+}
+
+#search {
+    float: right;
+    margin: 2em 1em;
+}
+
+.diary {
+    padding: 1em;
+}
+.diary-details {
+    padding-left: 2em;
+}
+.question {
+    font-style: italic;
+    font-weight: bold;
 }

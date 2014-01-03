@@ -51,15 +51,6 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                  <label for="lastModify"><g:message code="diary.lastModify.label" default="Last Modify" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: diaryInstance, field: 'lastModify', 'errors')}">
-                                    <g:datePicker name="lastModify" precision="day" value="${diaryInstance?.lastModify}"  />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
                                   <label for="parentId"><g:message code="diary.parentId.label" default="Parent Id" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: diaryInstance, field: 'parentId', 'errors')}">

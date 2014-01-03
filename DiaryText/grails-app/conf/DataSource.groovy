@@ -43,8 +43,8 @@ environments {
             //password = ""
             dbCreate = "update"
             //url = "jdbc:hsqldb:mem:testDb"
-            url = "jdbc:mysql://192.168.1.120:3306/diary_text?useUnicode=true&characterEncoding=UTF-8"
-//            url = "jdbc:mysql://192.168.1.198:3306/eopoosp?useUnicode=true&characterEncoding=UTF-8"
+            url = "jdbc:mysql://192.168.1.120:3306/test?useUnicode=true&characterEncoding=UTF-8"
+//            url = "jdbc:mysql://192.1
         }
     }
     production {
