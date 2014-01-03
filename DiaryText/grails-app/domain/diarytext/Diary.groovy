@@ -8,13 +8,17 @@ class Diary {
         lastUpdated()
     }
 
+    static mapping = {
+        sort "lastUpdated"
+    }
+
     static belongsTo = [user:User]
 
-    int parentId
+    int parentId=0
     String text
     Date lastUpdated
     Date dateCreated
     public String toString(){
-        return "\r\n"+text;
+        return text;
     }
 }

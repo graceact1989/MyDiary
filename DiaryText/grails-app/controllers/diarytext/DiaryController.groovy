@@ -29,9 +29,20 @@ class DiaryController {
         redirect(action: "list", params: params)
     }
 
+
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [diaryInstanceList: Diary.list(params), diaryInstanceTotal: Diary.count()]
+        def result = Diary.findAllByDateCreatedGreaterThan(getTodayTime(),[sort:'lastUpdated',order:'desc',offset:params.offset?params.int('offset'):0,max:params.max])
+        def count = Diary.countByDateCreatedGreaterThan(getTodayTime())
+        [diaryInstanceList: result, diaryInstanceTotal:count]
+    }
+
+    Date getTodayTime() {
+        def today = new Date();
+        today.setHours(0)
+        today.setMinutes(0)
+        today.setSeconds(0)
+        return today
     }
 
     def create = {
@@ -43,11 +54,11 @@ class DiaryController {
     def save = {
         def diaryInstance = new Diary(params)
         if (diaryInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'diary.label', default: 'Diary'), diaryInstance.id])}"
-            redirect(action: "show", id: diaryInstance.id)
+//            flash.message = "${message(code: 'default.created.message', args: [message(code: 'diary.label', default: 'Diary'), diaryInstance.id])}"
+            redirect(action: "list")
         }
         else {
-            render(view: "create", model: [diaryInstance: diaryInstance])
+            render(view: "list", model: [diaryInstance: diaryInstance])
         }
     }
 

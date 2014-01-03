@@ -14,7 +14,7 @@
   <title>Login</title>
 </head>
 <body>
-<div class="body">
+<div id="loginPage">
     <h1>Login</h1>
     <g:if test="${flash.message}">
         <div class="message">${flash.message}</div>

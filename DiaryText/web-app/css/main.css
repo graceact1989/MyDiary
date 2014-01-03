@@ -324,3 +324,19 @@ a.header-main:link,a.header-main:visited {
     font-style: italic;
     font-weight: bold;
 }
+
+#diary-list{
+    float: left;
+    margin: 0 15px 10px 15px;
+    width: 43%;
+}
+
+#diary-create{
+    margin-top: 25px;
+}
+
+#loginPage{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
