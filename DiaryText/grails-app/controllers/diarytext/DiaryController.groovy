@@ -32,8 +32,9 @@ class DiaryController {
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        def result = Diary.findAllByDateCreatedGreaterThan(getTodayTime(),[sort:'lastUpdated',order:'desc',offset:params.offset?params.int('offset'):0,max:params.max])
-        def count = Diary.countByDateCreatedGreaterThan(getTodayTime())
+//        def tmpResult = Diary.findAll("from Diary where lastUpdated > :lastUpdated and user.id = :id order by lastUpdated desc",[lastUpdated:getTodayTime(),id:session.user.id,offset:params.offset?params.int('offset'):0,max:params.max])
+        def result = Diary.findAllByUserAndDateCreatedGreaterThan(session.user,getTodayTime(),[sort:'lastUpdated',order:'desc',offset:params.offset?params.int('offset'):0,max:params.max])
+        def count = Diary.countByUserAndDateCreatedGreaterThan(session.user,getTodayTime())
         [diaryInstanceList: result, diaryInstanceTotal:count]
     }
 

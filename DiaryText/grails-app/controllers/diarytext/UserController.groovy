@@ -4,7 +4,7 @@ class UserController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
-    def beforeInterceptor = [action:this.&auth,except:['login', 'logout', 'authenticate']]
+    def beforeInterceptor = [action:this.&auth,except:['login', 'logout', 'authenticate','register','checkUserName']]
     def auth() {
        if (!session.user){
            redirect(controller:"user", action:"login")
@@ -28,8 +28,9 @@ class UserController {
         redirect(action:"login")
     }
 
+
     def authenticate = {
-        def tmp = params.password.encodeAsSHA1();
+//        def tmp = params.password.encodeAsSHA1();
         def user = User.findByUserNameAndPassword(params.login, params.password.encodeAsSHA1())
         if(user){
             session.user = user
@@ -42,7 +43,7 @@ class UserController {
     }
 
     def list = {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 5, 100)
         [userInstanceList: User.list(params), userInstanceTotal: User.count()]
     }
 
@@ -52,14 +53,21 @@ class UserController {
         return [userInstance: userInstance]
     }
 
-    def save = {
+    def register = {
         def userInstance = new User(params)
         if (userInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])}"
-            redirect(action: "show", id: userInstance.id)
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.userName])}"
+            redirect(action: "login", userInstance: userInstance)
         }
-        else {
-            render(view: "create", model: [userInstance: userInstance])
+    }
+
+    def checkUserName = {
+
+        def userName = params['userName']
+        if (User.findByUserName(userName)) {
+            render "<span class='error'>  用户名已经存在 </span>"
+        } else {
+            render    "<span class='success'>  恭喜您，此账号可用！ </span>"
         }
     }
 

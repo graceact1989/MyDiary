@@ -325,17 +325,31 @@ a.header-main:link,a.header-main:visited {
     font-weight: bold;
 }
 
+.answer{
+    text-indent:2em;
+    line-height: 2;
+    margin: 5px 0 0 15px;
+}
+
 #diary-list{
+    word-wrap : break-word;
     float: left;
-    margin: 0 15px 10px 15px;
+    margin: 0 25px 10px 15px;
     width: 43%;
 }
 
 #diary-create{
-    margin-top: 25px;
+    float: left;
+    margin-top: 0px;
 }
 
 #loginPage{
+     width: 50%;
+     margin-left: auto;
+     margin-right: auto;
+ }
+
+#register{
     width: 50%;
     margin-left: auto;
     margin-right: auto;

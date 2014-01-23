@@ -2,7 +2,7 @@ package diarytext
 
 class User {
     static constraints = {
-        userName()
+        userName(unique: true, blank: false)
         password(password:true)
     }
 

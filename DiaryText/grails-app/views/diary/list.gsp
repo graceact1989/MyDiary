@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'diary.label', default: 'Diary')}"/>
+    <g:javascript src="diary/jquery-1.6.2.min.js" />
     <title><g:message code="default.list.label" args="[entityName]"/></title>
 </head>
 
@@ -20,9 +21,10 @@
 
             <p class="diary-details">
 
-                <span class="question">${diaryInstance.dateCreated.format("yyyy-MM-dd HH:mm:ss")}-></span>
-                <span class="answer">
-                    ${diaryInstance.text}</span>
+                <div class="question">${diaryInstance.dateCreated.format("yyyy-MM-dd HH:mm:ss")}</div>
+                <div class="answer" name="${diaryInstance.id}">
+                    <g:subText name="${diaryInstance.id}" text="${diaryInstance.text}" length="30" />
+                </div>
             </p>
 
         </div>
@@ -45,8 +47,27 @@
         </div>
     </g:form>
 
+    <script type="text/javascript">
+        %{--内容的动态显示--}%
+        function showText(name){
+            var showId = "#show"+name;
+            $(showId).css({display:"none"});
+            var hiddenId=  "#hidden"+name;
+            $(hiddenId).css({display:"inline"});
+        }
+        function hiddenText(name){
+            var showId = "#show"+name;
+            $(showId).css({display:"inline"});
+            var hiddenId=  "#hidden"+name;
+            $(hiddenId).css({display:"none"});
+        }
+
+    </script>
+
     <script>
+    %{--输入框的聚焦、Ctrl+Enter提交--}%
         var areaId = document.getElementById('textareaId');
+        areaId.focus();
         areaId.onkeydown = function(e){
             e = e?e:window.event;
             if(e.ctrlKey && 13==e.keyCode){
